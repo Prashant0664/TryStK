@@ -19,8 +19,8 @@ const callFunction = async () => {
                 url: 'https://latest-stock-price.p.rapidapi.com/any',
                 params: { Identifier: arr[i] },
                 headers: {
-                    'X-RapidAPI-Key': '6aaf657c3cmsh646be86afaa69e1p1cd2e1jsnd55aa8aaac44',
-                    'X-RapidAPI-Host': 'latest-stock-price.p.rapidapi.com'
+                    'X-RapidAPI-Key': process.env.KEYS,
+                    'X-RapidAPI-Host': process.env.KKKI
                 }
             };
             const response = await axios.request(options);
