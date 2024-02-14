@@ -87,7 +87,7 @@ app.get('/', async (req, res) => {
             "perChange365d": 26.49,
             "perChange30d": -12.55
         }
-        // sendAboveMail(data, "text", 2);
+        sendAboveMail(data, "", "");
         res.status(200).json({ message: datar });
     } catch (error) {
         console.log(error);
