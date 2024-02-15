@@ -73,7 +73,7 @@ if (hour <= 15 && minute <= 60 && hour >= 9 && minute >= 0) {
 }
 app.get('/', async (req, res) => {
     try {
-        const datar = await callFunction();
+        // const datar = await callFunction();
         data = {
             "symbol": "INDUSINDBK",
             "identifier": "INDUSINDBKEQN",
@@ -93,14 +93,14 @@ app.get('/', async (req, res) => {
             "perChange30d": -12.55
         }
         // sendAboveMail(data, "", "");
-        res.status(200).json({ message: datar });
+        res.status(200).json({ message: data });
     } catch (error) {
         console.log(error);
         res.status(500).json({ message: "Internal server error" });
     }
 })
 app.use(cors());
-const PORT = process.env.PORT || 5000;
+const PORT = process.env.PORT || 5678;
 app.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}`);
 })
