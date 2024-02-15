@@ -35,10 +35,15 @@ var flags = [0, 0, 0, 0, 0, 0, 0, 0];
 if (hour == 10 && minute == 0 && second >= 0 && second <= 30) {
     flags = [0, 0, 0, 0, 0, 0, 0, 0];
 }
-
+var ic=1;
 if (hour <= 15 && minute <= 60 && hour >= 9 && minute >= 0) {
     try {
         setInterval(async () => {
+            ic++;
+            if(ic%5==0){
+                ic=1;
+                console.log("ic changed at ",hour,":",minute,":",second);
+            }
             date = new Date();
             hour = date.getHours();
             minute = date.getMinutes();
