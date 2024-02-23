@@ -35,42 +35,44 @@ var flags = [0, 0, 0, 0, 0, 0, 0, 0];
 if (hour == 10 && minute == 0 && second >= 0 && second <= 30) {
     flags = [0, 0, 0, 0, 0, 0, 0, 0];
 }
-var ic=1;
-if (hour <= 15 && minute <= 60 && hour >= 9 && minute >= 0) {
-    try {
-        setInterval(async () => {
-            ic++;
-            if(ic%5==0){
-                ic=1;
-                console.log("ic changed at ",hour,":",minute,":",second);
-            }
-            date = new Date();
-            hour = date.getHours();
-            minute = date.getMinutes();
-            second = date.getSeconds();
-            if (hour == 10 && minute == 0 && second >= 0 && second <= 30) {
-                flags = [0, 0, 0, 0, 0, 0, 0, 0];
-            }
-            // console.log("i");
-            var inv = [546.00, 461.20, 348.60, 994.65, 3419.90, 170.68, 562.20, 358.90]
-            var arrll = [546.00 + 30.00, 557.90, 348.60 + 30.00, 1200.65, 3419.00 + 30, 225.50, 748.00, 407.00]
-            // var arrll = [546.00, 461.20, 348.60, 994.65, 3419.90, 170.68, 562.20, 358.90]
-            const datar = await callFunction();
-            if(datar[0] && datar[0][0] && datar)
-            for (var i = 0; i < Math.min(inv.length, datar.length); i++) {
-                // console.log(datar[0].length);
-                if (datar[i][0] && inv[i]>= arrll[i] && flags[i] == 0) {
-                    // console.log("---");
-                    await sendAboveMail(datar[i][0], arrll[i], inv[i]);
-                    flags[i] = 1;
+var ic = 1;
+setInterval(async () => {
+    if (hour <= 15 && minute <= 60 && hour >= 9 && minute >= 0) {
+        try {
+            setInterval(async () => {
+                ic++;
+                if (ic % 5 == 0) {
+                    ic = 1;
+                    console.log("ic changed at ", hour, ":", minute, ":", second);
                 }
-                break;
-            }
-        }, 1000*120);
-    } catch (error) {
-        console.log(error);
+                date = new Date();
+                hour = date.getHours();
+                minute = date.getMinutes();
+                second = date.getSeconds();
+                if (hour == 10 && minute == 0 && second >= 0 && second <= 30) {
+                    flags = [0, 0, 0, 0, 0, 0, 0, 0];
+                }
+                // console.log("i");
+                var inv = [546.00, 461.20, 348.60, 994.65, 3419.90, 170.68, 562.20, 358.90]
+                var arrll = [546.00 + 30.00, 557.90, 348.60 + 30.00, 1200.65, 3419.00 + 30, 225.50, 748.00, 407.00]
+                // var arrll = [546.00, 461.20, 348.60, 994.65, 3419.90, 170.68, 562.20, 358.90]
+                const datar = await callFunction();
+                if (datar[0] && datar[0][0] && datar)
+                    for (var i = 0; i < Math.min(inv.length, datar.length); i++) {
+                        // console.log(datar[0].length);
+                        if (datar[i][0] && inv[i] >= arrll[i] && flags[i] == 0) {
+                            // console.log("---");
+                            await sendAboveMail(datar[i][0], arrll[i], inv[i]);
+                            flags[i] = 1;
+                        }
+                        break;
+                    }
+            }, 1000 * 120);
+        } catch (error) {
+            console.log(error);
+        }
     }
-}
+},10000)
 app.get('/', async (req, res) => {
     try {
         // const datar = await callFunction();
